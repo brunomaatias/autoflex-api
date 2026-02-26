@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 
 public record ProductRequestDTO(
 
+        Long productId,
+
         @NotBlank
         String code,
 

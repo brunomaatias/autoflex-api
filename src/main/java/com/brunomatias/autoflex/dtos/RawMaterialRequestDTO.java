@@ -1,8 +1,11 @@
 package com.brunomatias.autoflex.dtos;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record RawMaterialRequestDTO(
+
+        Long rawMaterialId,
 
         @NotBlank
         String code,
@@ -10,7 +13,7 @@ public record RawMaterialRequestDTO(
         @NotBlank
         String name,
 
-        @NotBlank
+        @NotNull
         Integer stockQuantity
 ) {
 }
