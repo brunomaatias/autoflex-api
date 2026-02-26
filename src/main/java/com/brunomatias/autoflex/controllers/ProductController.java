@@ -2,7 +2,7 @@ package com.brunomatias.autoflex.controllers;
 
 import com.brunomatias.autoflex.dtos.ProductRequestDTO;
 import com.brunomatias.autoflex.dtos.ProductResponseDTO;
-import com.brunomatias.autoflex.models.Product;
+import com.brunomatias.autoflex.dtos.ProductionSuggestionDTO;
 import com.brunomatias.autoflex.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +38,10 @@ public class ProductController {
     public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable String code, @RequestBody @Valid ProductRequestDTO dto) {
         ProductResponseDTO updated = productService.update(code, dto);
         return ResponseEntity.ok(updated);
+    }
+
+    @GetMapping("/production-plan")
+    public ResponseEntity<List<ProductionSuggestionDTO>> getProductionPlan() {
+        return ResponseEntity.ok(productService.calculateProductionPlan());
     }
 }
