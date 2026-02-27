@@ -24,8 +24,8 @@ public class RawMaterialService {
                 .toList();
     }
 
-    public RawMaterialResponseDTO findByCode(String code) {
-        return RawMaterialMapper.toResponseDTO(rawMaterialRepository.findByCode(code));
+    public RawMaterialResponseDTO findById(Long id) {
+        return RawMaterialMapper.toResponseDTO(rawMaterialRepository.findById(id).orElseThrow());
     }
 
     public RawMaterialResponseDTO save(RawMaterialRequestDTO dto) {
@@ -33,8 +33,8 @@ public class RawMaterialService {
         return RawMaterialMapper.toResponseDTO(rawMaterialRepository.save(rawMaterial));
     }
 
-    public RawMaterialResponseDTO update(String code, RawMaterialRequestDTO dto) {
-        RawMaterial existing = rawMaterialRepository.findByCode(code);
+    public RawMaterialResponseDTO update(Long id, RawMaterialRequestDTO dto) {
+        RawMaterial existing = rawMaterialRepository.findById(id).orElseThrow();
 
         existing.setCode(dto.code());
         existing.setName(dto.name());
@@ -42,5 +42,9 @@ public class RawMaterialService {
         RawMaterial updated = rawMaterialRepository.save(existing);
 
         return RawMaterialMapper.toResponseDTO(updated);
+    }
+
+    public void deleteRawMaterialById(Long id) {
+        rawMaterialRepository.deleteById(id);
     }
 }
