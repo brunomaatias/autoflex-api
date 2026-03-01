@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -29,4 +30,11 @@ public class RawMaterial implements Serializable {
 
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.code == null || this.code.trim().isEmpty()) {
+            this.code = "RWM-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+        }
+    }
 }
