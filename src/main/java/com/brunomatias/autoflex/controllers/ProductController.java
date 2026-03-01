@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -38,6 +39,12 @@ public class ProductController {
     public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable String code, @RequestBody @Valid ProductRequestDTO dto) {
         ProductResponseDTO updated = productService.update(code, dto);
         return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        productService.deleteProductById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/production-plan")

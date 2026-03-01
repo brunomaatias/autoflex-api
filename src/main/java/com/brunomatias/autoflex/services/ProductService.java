@@ -38,8 +38,8 @@ public class ProductService {
                 .toList();
     }
 
-    public List<ProductResponseDTO> findAllByOrderByPrice() {
-        return productRepository.findAllByOrderByPrice()
+    public List<ProductResponseDTO> findAllByOrderByPriceDesc() {
+        return productRepository.findAllByOrderByPriceDesc()
                 .stream()
                 .map(ProductMapper::toResponseDTO)
                 .toList();
@@ -68,7 +68,7 @@ public class ProductService {
 
     public List<ProductionSuggestionDTO> calculateProductionPlan() {
         List<ProductionSuggestionDTO> result = new ArrayList<>();
-        List<Product> products = productRepository.findAllByOrderByPrice();
+        List<Product> products = productRepository.findAllByOrderByPriceDesc();
 
         Map<Long, Integer> stockMap = rawMaterialRepository.findAll()
                 .stream()
@@ -111,5 +111,9 @@ public class ProductService {
             }
         }
         return result;
+    }
+
+    public void deleteProductById(Long id) {
+        productRepository.deleteById(id);
     }
 }
