@@ -8,7 +8,6 @@ public class ProductMapper {
 
     public static Product toEntity(ProductRequestDTO dto) {
         Product product = new Product();
-        product.setProductId(dto.productId());
         product.setCode(dto.code());
         product.setName(dto.name());
         product.setPrice(dto.price());
